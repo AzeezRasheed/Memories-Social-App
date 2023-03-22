@@ -1,24 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Home from "./pages/home/Home";
+import "./index.css";
+import { Route, Routes } from "react-router-dom";
+import Profile from "./pages/profile/Profile";
+import ModalSettings from "./components/Modal/ModalSettings";
+import ModalPost from "./components/Modal/ModalPost";
 
 function App() {
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
+  const [commentModalPostOpen, setCommentModalPostOpen] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              isSettingsModalOpen={isSettingsModalOpen}
+              setIsSettingsModalOpen={setIsSettingsModalOpen}
+            />
+          }
+        />
+        {/* <Route
+          path="/p/rasheed/comments"
+          element={
+            <>
+              <ModalPost
+                isOpen={commentModalPostOpen}
+                setIsOpen={setCommentModalPostOpen}
+                // post={post}
+                // currentUserId={currentUserId}
+              />
+            </>
+          }
+        /> */}
+        {/* <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/forgot" element={<ForgotPassword />} />
+      <Route path="/resetpassword" element={<Reset />} /> */}
+      </Routes>
+      <ModalSettings
+        isOpen={isSettingsModalOpen}
+        setIsOpen={setIsSettingsModalOpen}
+      />
+    </>
   );
 }
 
